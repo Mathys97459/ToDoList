@@ -7,7 +7,7 @@ body, h1, ul, li, input, button {
   }
   
   /* Style global du body */
-  body {
+  .body-2 {
     background-color: #f0f4f8;
     display: flex;
     justify-content: center;
@@ -88,3 +88,35 @@ body, h1, ul, li, input, button {
     background-color: #eef1f5;
   }
   
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 10px 20px;
+}
+
+.navbar a {
+    color: #f2f2f2;
+    text-decoration: none;
+    padding: 10px 15px;
+    transition: background 0.3s;
+}
+
+.navbar a:hover {
+    background-color: #555;
+    color: white;
+}
+
+.navbar-logo {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.navbar-menu {
+    display: flex;
+}
+
+.navbar-menu a {
+    margin-left: 15px;
+}
