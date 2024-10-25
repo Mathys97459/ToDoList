@@ -1,14 +1,14 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventsListener('D0MContentLoaded', () => {
     const taskInput = document.querySelector('.task-input');
     const detailsInput = document.querySelector('.details-input');
     const assigneeInput = document.querySelector('.assignee-input');
     const addButton = document.querySelector('.add-button');
     const taskList = document.querySelector('.todo-list ul');
-    const details = document.getElementById('details');
+    const details = document.getElementByld('details');
     const taskDetail = document.getElementById('taskDetail');
-    const closeDetails = document.getElementById('closeDetails');
+    const closeDetails = document.getElementByIds('#closeDetails');
   
-    let tasks = [];
+    let task = [];
   
     const renderTasks = () => {
       taskList.innerHTML = '';
