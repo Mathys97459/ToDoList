@@ -59,19 +59,19 @@ document.addEventListener('DOMContentLoaded', () => {
           renderTasks();
         });
   
-        // Bouton pour marquer la tâche comme terminée
-        const completeButton = document.createElement('button');
-        completeButton.textContent = task.completed ? 'Rétablir' : 'Terminer';
-        completeButton.classList.add('complete-button');
-        completeButton.addEventListener('click', (event) => {
-          event.stopPropagation(); // Évite le déclenchement de l'événement de la tâche
-          task.completed = !task.completed; // Changer l'état de complétion
-          renderTasks();
-        });
+        // // Bouton pour marquer la tâche comme terminée
+        // const completeButton = document.createElement('button');
+        // completeButton.textContent = task.completed ? 'Rétablir' : 'Terminer';
+        // completeButton.classList.add('complete-button');
+        // completeButton.addEventListener('click', (event) => {
+        //   event.stopPropagation(); // Évite le déclenchement de l'événement de la tâche
+        //   task.completed = !task.completed; // Changer l'état de complétion
+        //   renderTasks();
+        // });
   
         listItem.appendChild(detailButton); // Ajout du bouton Détails
         listItem.appendChild(editButton);    // Ajout du bouton Modifier
-        listItem.appendChild(completeButton); // Ajout du bouton Terminer/Rétablir
+        // listItem.appendChild(completeButton); // Ajout du bouton Terminer/Rétablir
         listItem.appendChild(deleteButton);   // Ajout du bouton Supprimer
         listItem.classList.toggle('completed', task.completed);
         taskList.appendChild(listItem);
