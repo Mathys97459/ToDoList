@@ -1,65 +1,98 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const taskInput = document.querySelector(".task-input");
-  const addButton = document.querySelector(".add-button");
-  const todoList = document.querySelector(".todo-list ul");
+document.addEventListener('DOMContentLoaded', () => {
+  const taskInput = document.querySelector('.task-input');
+  const detailsInput = document.querySelector('.details-input');
+  const assigneeInput = document.querySelector('.assignee-input');
+  const addButton = document.querySelector('.add-button');
+  const taskList = document.querySelector('.todo-list ul');
+  const details = document.getElementById('details');
+  const taskDetail = document.getElementById('taskDetail');
+  const closeDetails = document.getElementById('closeDetails');
 
-  function createTaskElement(taskText) {
-    const li = document.createElement("li");
-    li.className = "task";
+  let tasks = [];
 
-    const taskContent = document.createElement("span");
-    taskContent.textContent = taskText;
-    taskContent.className = "task-content";
+  const renderTasks = () => {
+    taskList.innerHTML = '';
+    tasks.forEach((task, index) => {
+      const listItem = document.createElement('li');
+      listItem.textContent = task.text;
 
-    const editButton = document.createElement("button");
-    editButton.textContent = "Modifier";
-    editButton.className = "edit-button";
+      // Bouton pour afficher les détails de la tâche
+      const detailButton = document.createElement('button');
+      detailButton.textContent = 'Détails';
+      detailButton.classList.add('detail-button');
+      detailButton.addEventListener('click', (event) => {
+        event.stopPropagation(); // Évite le déclenchement de l'événement de la tâche
+        taskDetail.textContent = `Tâche : ${task.text} <br> Détails : ${task.details} - Assigné à : ${task.assignee}`;
+        details.style.display = 'block';
+      });
 
-    const deleteButton = document.createElement("button");
-    deleteButton.textContent = "Supprimer";
-    deleteButton.className = "delete-button";
+      // Bouton de modification
+      const editButton = document.createElement('button');
+      editButton.textContent = 'Modifier';
+      editButton.classList.add('edit-button');
+      editButton.addEventListener('click', (event) => {
+        event.stopPropagation(); // Empêche le détail de s'afficher
+        const newTaskText = prompt('Modifier le titre de la tâche:', task.text);
+        const newTaskDetails = prompt('Modifier les détails de la tâche:', task.details);
+        const newAssignee = prompt('Modifier la personne assignée:', task.assignee);
+        
+        if (newTaskText) {
+          tasks[index].text = newTaskText;
+        }
+        if (newTaskDetails) {
+          tasks[index].details = newTaskDetails;
+        }
+        if (newAssignee) {
+          tasks[index].assignee = newAssignee;
+        }
+        
+        renderTasks();
+      });
 
-    li.appendChild(taskContent);
-    li.appendChild(editButton);
-    li.appendChild(deleteButton);
+      // Bouton de suppression
+      const deleteButton = document.createElement('button');
+      deleteButton.textContent = 'Supprimer';
+      deleteButton.classList.add('delete-button');
+      deleteButton.addEventListener('click', (event) => {
+        event.stopPropagation(); // Évite le déclenchement de l'événement de la tâche
+        tasks.splice(index, 1);
+        renderTasks();
+      });
 
-    return li;
-  }
+      // Bouton pour marquer la tâche comme terminée
+      const completeButton = document.createElement('button');
+      completeButton.textContent = task.completed ? 'Rétablir' : 'Terminer';
+      completeButton.classList.add('complete-button');
+      completeButton.addEventListener('click', (event) => {
+        event.stopPropagation(); // Évite le déclenchement de l'événement de la tâche
+        task.completed = !task.completed; // Changer l'état de complétion
+        renderTasks();
+      });
 
-  function addTask() {
+      listItem.appendChild(detailButton); // Ajout du bouton Détails
+      listItem.appendChild(editButton);    // Ajout du bouton Modifier
+      listItem.appendChild(completeButton); // Ajout du bouton Terminer/Rétablir
+      listItem.appendChild(deleteButton);   // Ajout du bouton Supprimer
+      listItem.classList.toggle('completed', task.completed);
+      taskList.appendChild(listItem);
+    });
+  };
+
+  addButton.addEventListener('click', () => {
     const taskText = taskInput.value.trim();
-    if (taskText !== "") {
-      const taskElement = createTaskElement(taskText);
-      todoList.appendChild(taskElement);
-      taskInput.value = "";
-    }
-  }
+    const taskDetails = detailsInput.value.trim();
+    const assignee = assigneeInput.value.trim() || 'Non affecté';
 
-  function editTask(taskElement) {
-    const taskContent = taskElement.querySelector(".task-content");
-    const newTaskText = prompt("Modifier la tâche:", taskContent.textContent);
-    if (newTaskText !== null) {
-      taskContent.textContent = newTaskText.trim();
-    }
-  }
+    if (taskText === '') return;
 
-  function deleteTask(taskElement) {
-    todoList.removeChild(taskElement);
-  }
-
-  addButton.addEventListener("click", addTask);
-
-  todoList.addEventListener("click", (event) => {
-    if (event.target.classList.contains("edit-button")) {
-      editTask(event.target.parentElement);
-    } else if (event.target.classList.contains("delete-button")) {
-      deleteTask(event.target.parentElement);
-    }
+    tasks.push({ text: taskText, details: taskDetails, completed: false, assignee: assignee });
+    taskInput.value = '';
+    detailsInput.value = '';
+    assigneeInput.value = '';
+    renderTasks();
   });
 
-  taskInput.addEventListener("keypress", (event) => {
-    if (event.key === "Enter") {
-      addTask();
-    }
+  closeDetails.addEventListener('click', () => {
+    details.style.display = 'none';
   });
 });
