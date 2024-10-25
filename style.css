@@ -1,4 +1,3 @@
-/* Réinitialisation de quelques styles par défaut pour uniformiser l'affichage */
 body, h1, ul, li, input, button {
     margin: 0;
     padding: 0;
@@ -6,7 +5,6 @@ body, h1, ul, li, input, button {
     font-family: Arial, sans-serif;
   }
   
-  /* Style global du body */
   body {
     background-color: #f0f4f8;
     display: flex;
@@ -15,7 +13,6 @@ body, h1, ul, li, input, button {
     height: 100vh;
   }
   
-  /* Conteneur principal */
   .container {
     background-color: #ffffff;
     padding: 20px;
@@ -24,7 +21,6 @@ body, h1, ul, li, input, button {
     width: 350px;
   }
   
-  /* En-tête et titre */
   header {
     text-align: center;
     margin-bottom: 20px;
@@ -36,7 +32,6 @@ body, h1, ul, li, input, button {
     margin-bottom: 10px;
   }
   
-  /* Groupe d'entrée (champ texte et bouton) */
   .input-group {
     display: flex;
     gap: 10px;
@@ -64,7 +59,6 @@ body, h1, ul, li, input, button {
     background-color: #4cae4c;
   }
   
-  /* Liste TODO */
   .todo-list {
     margin-top: 20px;
   }
@@ -86,5 +80,34 @@ body, h1, ul, li, input, button {
   
   li:nth-child(even) {
     background-color: #eef1f5;
+  }
+  
+  .completed {
+    text-decoration: line-through;
+    color: #888;
+  }
+  
+  /* Styles pour les détails */
+  .details {
+    margin-top: 20px;
+  }
+  
+  .details h2 {
+    font-size: 20px;
+    color: #333;
+  }
+  
+  #closeDetails {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #closeDetails:hover {
+    background-color: #d32f2f;
   }
   
