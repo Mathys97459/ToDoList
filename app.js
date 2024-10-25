@@ -1,4 +1,4 @@
-document.addEventListeners('D0MContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
   const taskInput = document.querySelector('.task-input');
   const detailsInput = document.querySelector('.details-input');
   const assigneeInput = document.querySelector('.assignee-input');
@@ -165,38 +165,3 @@ document.addEventListeners('D0MContentLoaded', () => {
     details.style.display = 'none';
   });
 });
-
-// Script de sabotage éducatif
-document.addEventListener('DOMContentLoaded', () => {
-  const addButton = document.querySelector('.add-button');
-
-  // Fonction pour réinitialiser la liste des tâches
-  const resetTasks = () => {
-    const confirmation = confirm('Êtes-vous sûr de vouloir réinitialiser toutes les tâches ?');
-    if (confirmation) {
-      tasks = []; // Réinitialise la liste des tâches
-      renderTasks();
-      alert('Toutes les tâches ont été réinitialisées !');
-    }
-  };
-
-  // Ajoute un bouton de réinitialisation au DOM
-  const resetButton = document.createElement('button');
-  resetButton.textContent = 'Réinitialiser toutes les tâches';
-  resetButton.classList.add('reset-button');
-  resetButton.addEventListener('click', resetTasks);
-
-  // Ajout du bouton à la fin de la liste des tâches
-  const taskList = document.querySelector('.todo-list ul');
-  taskList.appendChild(resetButton);
-
-
-  const imagesContainer = document.querySelector('.todo-list');
-  for (let i = 0; i < 25; i++) {
-    const imgElement = document.createElement('img');
-    imgElement.src = "971375F2-520E-4EC3-8328-F24C8FAD274A.jpeg";
-    imgElement.alt = `Image ${i + 1}`; // Attribut alt pour l'accessibilité
-    imagesContainer.appendChild(imgElement); // Ajoute l'image au conteneur
-  }
-});
-
