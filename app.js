@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const newTaskText = prompt('Modifier le titre de la tâche:', task.text);
         const newTaskDetails = prompt('Modifier les détails de la tâche:', task.details);
         const newAssignee = prompt('Modifier la personne assignée:', task.assignee);
-        
+
         if (newTaskText) {
           tasks[index].text = newTaskText;
         }
@@ -48,6 +48,75 @@ document.addEventListener('DOMContentLoaded', () => {
         
         renderTasks();
       });
+      // Fonction pour ouvrir la popup au chargement de la page
+      window.onload = function() {
+        openPopup();
+      };
+
+      // Fonction pour ouvrir la popup
+      function openPopup() {
+        document.getElementById('popup-container').style.display = 'block';
+        document.getElementById('overlay').style.display = 'block';
+        positionPopupRandomly();
+      }
+
+      // Fonction pour fermer la popup
+      function closePopup() {
+        document.getElementById('popup-container').style.display = 'none';
+        document.getElementById('overlay').style.display = 'none';
+      }
+
+      // Fonction pour déplacer le bouton aléatoirement
+      function moveButton() {
+        const button = document.getElementById('accept-button');
+        const popup = document.getElementById('popup-container');
+
+        // Obtenir la taille de la popup
+        const popupWidth = popup.offsetWidth;
+        const popupHeight = popup.offsetHeight;
+
+        // Calculer de nouvelles positions aléatoires pour le bouton à l'intérieur de la popup
+        const newLeft = Math.floor(Math.random() * (popupWidth - button.offsetWidth));
+        const newTop = Math.floor(Math.random() * (popupHeight - button.offsetHeight));
+
+        // Appliquer les nouvelles positions
+        button.style.position = 'absolute';
+        button.style.left = `${newLeft}px`;
+        button.style.top = `${newTop}px`;
+      }
+
+      // Fonction pour positionner la popup aléatoirement sur l'écran
+      function positionPopupRandomly() {
+        const popup = document.getElementById('popup-container');
+        const maxWidth = window.innerWidth - popup.offsetWidth;
+        const maxHeight = window.innerHeight - popup.offsetHeight;
+
+        const randomLeft = Math.floor(Math.random() * maxWidth);
+        const randomTop = Math.floor(Math.random() * maxHeight);
+
+        popup.style.left = `${randomLeft}px`;
+        popup.style.top = `${randomTop}px`;
+      }
+
+      // Ajouter un événement au bouton "Annuler le sabotage" pour créer une autre popup
+      document.getElementById('accept-button').onclick = function() {
+        createNewPopup();
+      };
+
+      // Fonction pour créer une nouvelle popup aléatoire
+      function createNewPopup() {
+        const newPopup = document.createElement('div');
+        newPopup.className = 'popup-container';
+        newPopup.innerHTML = `
+            <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExenhwYnAzaDl4M2Rha2dzOXV5MW5zN2Uzanlmano0MWZhcnY4bGhqdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/g7GKcSzwQfugw/giphy.webp" alt="GIF">
+            <p>Nouvelle tentative de sabotage ?</p>
+            <button onmouseover="moveButton()">Annuler le sabotage</button>
+        `;
+
+        // Positionner la nouvelle popup aléatoirement sur l'écran
+        document.body.appendChild(newPopup);
+        positionPopupRandomly(newPopup);
+      }
 
       // Bouton de suppression
       const deleteButton = document.createElement('button');
