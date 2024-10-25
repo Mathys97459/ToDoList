@@ -1,0 +1,90 @@
+/* Réinitialisation de quelques styles par défaut pour uniformiser l'affichage */
+body, h1, ul, li, input, button {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Style global du body */
+  body {
+    background-color: #f0f4f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* Conteneur principal */
+  .container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    width: 350px;
+  }
+  
+  /* En-tête et titre */
+  header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  /* Groupe d'entrée (champ texte et bouton) */
+  .input-group {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .task-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .add-button {
+    background-color: #5cb85c;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-button:hover {
+    background-color: #4cae4c;
+  }
+  
+  /* Liste TODO */
+  .todo-list {
+    margin-top: 20px;
+  }
+  
+  ul {
+    list-style-type: none;
+  }
+  
+  li {
+    background-color: #f9f9f9;
+    margin-bottom: 10px;
+    padding: 12px 15px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #e0e0e0;
+  }
+  
+  li:nth-child(even) {
+    background-color: #eef1f5;
+  }
+  
